@@ -6,8 +6,9 @@ export async function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const article = await getArticleBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
   if (!article) return {};
   return { title: `${article.title} — MyResearch` };
 }
@@ -20,8 +21,9 @@ interface BibEntry {
   url?: string;
 }
 
-export default async function ArticlePage({ params }: { params: { slug: string } }) {
-  const article = await getArticleBySlug(params.slug);
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
   return (
