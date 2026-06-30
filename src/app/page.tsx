@@ -5,29 +5,18 @@ export default async function Home() {
   const articles = await getAllArticles();
 
   return (
-    <div>
-      <header style={{ marginBottom: "3rem" }}>
-        <h1 className="page-title">MyResearch</h1>
-        <p className="page-subtitle">
-          Ricerche, saggi e riflessioni personali.
-        </p>
-      </header>
-
-      <hr className="section-divider" />
-
+    <ul className="article-list">
       {articles.length === 0 ? (
-        <p style={{ color: "#888", fontFamily: "EB Garamond, Palatino, serif" }}>
+        <li style={{ padding: "3rem 0", color: "#aaa", fontFamily: "EB Garamond, Georgia, serif" }}>
           Nessun articolo ancora pubblicato.
-        </p>
+        </li>
       ) : (
-        <ul className="article-list">
-          {articles.map((article) => (
-            <li key={article.slug}>
-              <ArticleCard article={article} />
-            </li>
-          ))}
-        </ul>
+        articles.map((article) => (
+          <li key={article.slug} className="article-list-item">
+            <ArticleCard article={article} />
+          </li>
+        ))
       )}
-    </div>
+    </ul>
   );
 }

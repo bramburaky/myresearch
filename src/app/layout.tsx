@@ -11,10 +11,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it">
-      <body style={{ backgroundColor: "#fffff8", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <body style={{ background: "#fff", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
         <Nav />
         <main style={{ flex: 1 }}>
-          <div className="site-content">{children}</div>
+          <div className="site-wrap" style={{ paddingTop: "2.5rem", paddingBottom: "5rem" }}>
+            {children}
+          </div>
         </main>
         <Footer />
       </body>

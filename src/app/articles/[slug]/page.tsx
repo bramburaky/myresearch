@@ -26,16 +26,12 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const article = await getArticleBySlug(slug);
   if (!article) notFound();
 
+  const primaryTag = article.tags?.[0];
+
   return (
     <article>
       <header className="article-header">
-        {article.tags && article.tags.length > 0 && (
-          <div className="article-header-tags">
-            {article.tags.map((tag: string) => (
-              <span key={tag} className="tag">{tag}</span>
-            ))}
-          </div>
-        )}
+        {primaryTag && <span className="article-kicker-large">{primaryTag}</span>}
         <h1 className="article-page-title">{article.title}</h1>
         {article.excerpt && (
           <p className="article-page-excerpt">{article.excerpt}</p>
@@ -46,47 +42,38 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </p>
       </header>
 
-      <hr className="section-divider" />
-
-      <div
-        className="prose"
-        dangerouslySetInnerHTML={{ __html: article.contentHtml }}
-      />
+      <div className="prose" dangerouslySetInnerHTML={{ __html: article.contentHtml }} />
 
       {article.bibliography && article.bibliography.length > 0 && (
         <>
-          <hr className="section-divider" />
+          <hr className="divider" style={{ marginTop: "3rem" }} />
           <section>
-            <h2 style={{
-              fontFamily: "EB Garamond, Palatino, serif",
-              fontSize: "1.3rem",
+            <p style={{
+              fontFamily: "Inter, sans-serif",
+              fontSize: "0.72rem",
               fontWeight: 600,
-              color: "#111",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "#aaa",
               marginBottom: "1.5rem",
             }}>
-              Riferimenti bibliografici
-            </h2>
+              Riferimenti
+            </p>
             <ol style={{ paddingLeft: "1.2rem", margin: 0 }}>
               {article.bibliography.map((ref: BibEntry, i: number) => (
                 <li key={i} style={{
-                  fontFamily: "EB Garamond, Palatino, serif",
-                  fontSize: "0.98rem",
-                  lineHeight: 1.65,
-                  color: "#333",
-                  marginBottom: "0.8rem",
+                  fontFamily: "EB Garamond, Georgia, serif",
+                  fontSize: "1rem",
+                  lineHeight: 1.6,
+                  color: "#444",
+                  marginBottom: "0.7rem",
                 }}>
-                  {ref.author}.{" "}
-                  <em>{ref.title}</em>
+                  {ref.author}. <em>{ref.title}</em>
                   {ref.year ? `. ${ref.year}` : ""}
                   {ref.publisher ? `. ${ref.publisher}` : ""}
                   {ref.url && (
-                    <>
-                      {". "}
-                      <a href={ref.url} target="_blank" rel="noopener noreferrer"
-                        style={{ color: "#555", textDecoration: "underline", textUnderlineOffset: "2px" }}>
-                        →
-                      </a>
-                    </>
+                    <> <a href={ref.url} target="_blank" rel="noopener noreferrer"
+                      style={{ color: "#999", textDecoration: "underline", textUnderlineOffset: "2px" }}>→</a></>
                   )}
                 </li>
               ))}

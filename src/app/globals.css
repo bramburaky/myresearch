@@ -1,67 +1,59 @@
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ─── Base ─────────────────────────────────────────────────────────────────── */
+/* ─── Reset & base ──────────────────────────────────────────────────────────── */
 
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
   font-size: 18px;
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background-color: #fffff8;
+  background: #fff;
   color: #111;
-  font-family: 'EB Garamond', Palatino, 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
+  font-family: 'EB Garamond', Georgia, serif;
+  margin: 0;
 }
 
 /* ─── Layout ────────────────────────────────────────────────────────────────── */
 
+.site-wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ─── Nav ───────────────────────────────────────────────────────────────────── */
+
 .site-nav {
-  max-width: 87.5%;
+  border-bottom: 1px solid #e2e2e2;
+  padding: 1.1rem 0;
+}
+
+.site-nav-inner {
+  max-width: 780px;
   margin: 0 auto;
-  padding: 2rem 0 1.5rem;
+  padding: 0 2rem;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #e8e6df;
 }
-
-.site-content {
-  max-width: 55%;
-  margin: 0 auto;
-  padding: 4rem 0 6rem;
-}
-
-@media (max-width: 900px) {
-  .site-content { max-width: 87.5%; }
-  .site-nav { max-width: 87.5%; }
-}
-
-@media (max-width: 600px) {
-  .site-content { max-width: 92%; }
-  .site-nav { max-width: 92%; }
-  html { font-size: 16px; }
-}
-
-/* ─── Nav typography ────────────────────────────────────────────────────────── */
 
 .nav-wordmark {
-  font-family: 'EB Garamond', Palatino, serif;
-  font-size: 1.15rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
   font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: #111;
-  letter-spacing: 0.01em;
   text-decoration: none;
 }
-
-.nav-wordmark:hover { color: #333; }
 
 .nav-links {
   display: flex;
@@ -72,17 +64,20 @@ body {
 }
 
 .nav-link {
-  font-family: 'EB Garamond', Palatino, serif;
-  font-size: 0.95rem;
-  color: #555;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #888;
   text-decoration: none;
-  letter-spacing: 0.02em;
+  transition: color 0.15s;
 }
 
 .nav-link:hover,
 .nav-link.active { color: #111; }
 
-/* ─── Article list ──────────────────────────────────────────────────────────── */
+/* ─── Home article list ─────────────────────────────────────────────────────── */
 
 .article-list {
   list-style: none;
@@ -90,112 +85,126 @@ body {
   margin: 0;
 }
 
-.article-list li + li {
-  margin-top: 3rem;
-  padding-top: 3rem;
-  border-top: 1px solid #e8e6df;
+.article-list-item {
+  padding: 2.8rem 0;
+  border-bottom: 1px solid #e2e2e2;
 }
 
-.article-date {
-  font-family: 'EB Garamond', Palatino, serif;
-  font-size: 0.9rem;
-  color: #888;
-  letter-spacing: 0.03em;
-  margin-bottom: 0.5rem;
+.article-list-item:first-child {
+  padding-top: 2.8rem;
+  border-top: none;
+}
+
+.article-kicker {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #c0392b;
+  margin-bottom: 0.6rem;
+  display: block;
 }
 
 .article-title-link {
   display: block;
-  font-family: 'EB Garamond', Palatino, serif;
-  font-size: 1.6rem;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.85rem;
   font-weight: 600;
   color: #111;
-  line-height: 1.25;
+  line-height: 1.2;
   text-decoration: none;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.7rem;
+  letter-spacing: -0.01em;
 }
 
 .article-title-link:hover { color: #333; }
 
 .article-excerpt {
-  font-family: 'EB Garamond', Palatino, serif;
+  font-family: 'EB Garamond', Georgia, serif;
   font-size: 1.05rem;
-  line-height: 1.75;
-  color: #444;
-  margin: 0;
+  line-height: 1.7;
+  color: #555;
+  margin: 0 0 0.9rem;
 }
 
-.article-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.8rem;
-}
-
-.tag {
-  font-family: 'EB Garamond', Palatino, serif;
-  font-size: 0.82rem;
-  color: #777;
-  letter-spacing: 0.03em;
-  border: 1px solid #d8d5cd;
-  padding: 0.1rem 0.5rem;
-  text-decoration: none;
+.article-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: #aaa;
+  letter-spacing: 0.04em;
 }
 
 /* ─── Article page ──────────────────────────────────────────────────────────── */
 
 .article-header {
-  margin-bottom: 3rem;
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 2.5rem;
 }
 
-.article-header-tags {
-  display: flex;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.2rem;
+.article-kicker-large {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c0392b;
+  margin-bottom: 1rem;
+  display: block;
 }
 
 .article-page-title {
-  font-family: 'EB Garamond', Palatino, serif;
-  font-size: 2.2rem;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 2.6rem;
   font-weight: 600;
   color: #111;
-  line-height: 1.2;
-  margin-bottom: 0.8rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
 }
 
 .article-page-excerpt {
-  font-family: 'EB Garamond', Palatino, serif;
+  font-family: 'EB Garamond', Georgia, serif;
   font-size: 1.2rem;
   line-height: 1.65;
   color: #555;
   font-style: italic;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 }
 
 .article-page-meta {
-  font-family: 'EB Garamond', Palatino, serif;
-  font-size: 0.9rem;
-  color: #888;
-  letter-spacing: 0.03em;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: #aaa;
+  letter-spacing: 0.05em;
 }
 
-/* ─── Prose (article body) ──────────────────────────────────────────────────── */
+/* ─── Prose ─────────────────────────────────────────────────────────────────── */
 
 .prose {
-  font-family: 'EB Garamond', Palatino, serif;
-  font-size: 1.1rem;
-  line-height: 1.85;
-  color: #111;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: #1a1a1a;
 }
 
-.prose p { margin: 0 0 1.4rem; }
+.prose p { margin: 0 0 1.5rem; }
+
+.prose h1 {
+  font-size: 1.9rem;
+  font-weight: 600;
+  color: #111;
+  margin: 3rem 0 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
 
 .prose h2 {
   font-size: 1.5rem;
   font-weight: 600;
   color: #111;
-  margin: 3rem 0 0.8rem;
+  margin: 2.8rem 0 0.8rem;
   line-height: 1.2;
 }
 
@@ -206,57 +215,47 @@ body {
   margin: 2.2rem 0 0.6rem;
 }
 
-.prose h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  font-style: italic;
-  color: #333;
-  margin: 1.8rem 0 0.5rem;
-}
-
 .prose blockquote {
-  border-left: 2px solid #ccc8bb;
-  padding-left: 1.5rem;
+  border-left: 2px solid #ddd;
+  padding-left: 1.4rem;
   margin: 2rem 0;
-  color: #555;
+  color: #666;
   font-style: italic;
-  font-size: 1.05rem;
 }
 
 .prose a {
   color: #111;
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: #bbb;
+  text-decoration-color: #ccc;
 }
 
 .prose a:hover { text-decoration-color: #111; }
 
 .prose strong { font-weight: 600; }
 
-.prose em { font-style: italic; }
-
-.prose ul, .prose ol {
-  padding-left: 1.4rem;
-  margin-bottom: 1.4rem;
+.prose ul,
+.prose ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.prose li { margin-bottom: 0.35rem; line-height: 1.75; }
+.prose li { margin-bottom: 0.4rem; line-height: 1.75; }
 
 .prose code {
   font-family: 'Courier New', monospace;
-  font-size: 0.88rem;
-  background: #f0ede4;
-  padding: 0.1rem 0.3rem;
+  font-size: 0.85rem;
+  background: #f5f5f5;
+  padding: 0.1rem 0.35rem;
   border-radius: 2px;
 }
 
 .prose pre {
-  background: #f0ede4;
+  background: #f5f5f5;
   padding: 1.2rem 1.5rem;
   overflow-x: auto;
-  margin-bottom: 1.4rem;
-  border-left: 2px solid #ccc8bb;
+  margin-bottom: 1.5rem;
+  border-left: 2px solid #ddd;
 }
 
 .prose pre code { background: none; padding: 0; }
@@ -265,111 +264,98 @@ body {
   border: none;
   text-align: center;
   margin: 3rem 0;
-  color: #aaa;
-  font-size: 1.2rem;
+  color: #bbb;
+  font-size: 1rem;
   letter-spacing: 0.5em;
 }
-
 .prose hr::before { content: "* * *"; }
-
-.prose figure {
-  margin: 2rem 0;
-}
-
-.prose figcaption {
-  font-size: 0.88rem;
-  color: #777;
-  font-style: italic;
-  margin-top: 0.5rem;
-  text-align: left;
-}
 
 /* ─── Divider ───────────────────────────────────────────────────────────────── */
 
-.section-divider {
+.divider {
   border: none;
-  text-align: center;
-  margin: 3rem 0;
-  color: #ccc;
-  font-size: 1rem;
-  letter-spacing: 0.4em;
+  border-top: 1px solid #e2e2e2;
+  margin: 2.5rem 0;
 }
-
-.section-divider::before { content: "* * *"; }
 
 /* ─── Bibliography page ─────────────────────────────────────────────────────── */
 
-.bib-author-section + .bib-author-section {
-  margin-top: 2.5rem;
-  padding-top: 2.5rem;
-  border-top: 1px solid #e8e6df;
+.bib-section + .bib-section {
+  margin-top: 2.2rem;
+  padding-top: 2.2rem;
+  border-top: 1px solid #e2e2e2;
 }
 
-.bib-author-name {
-  font-family: 'EB Garamond', Palatino, serif;
-  font-size: 1.15rem;
+.bib-author {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
   font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: #111;
   margin-bottom: 1rem;
 }
 
 .bib-entry {
-  font-family: 'EB Garamond', Palatino, serif;
+  font-family: 'EB Garamond', Georgia, serif;
   font-size: 1rem;
   line-height: 1.6;
   color: #333;
-  padding-left: 1.2rem;
-  border-left: 1px solid #e8e6df;
-  margin-bottom: 1rem;
+  padding-left: 1.1rem;
+  border-left: 1px solid #e2e2e2;
+  margin-bottom: 0.9rem;
 }
 
-.bib-entry-title { font-style: italic; }
+.bib-appears {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  color: #bbb;
+  margin-top: 0.2rem;
+  letter-spacing: 0.03em;
+}
 
-.bib-entry-meta { color: #888; }
+.bib-appears a { color: #999; text-decoration: underline; text-underline-offset: 2px; }
+.bib-appears a:hover { color: #111; }
 
-.bib-entry-appears {
-  font-size: 0.82rem;
+/* ─── Page titles ───────────────────────────────────────────────────────────── */
+
+.page-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: #aaa;
-  margin-top: 0.25rem;
-  font-style: normal;
+  margin-bottom: 1rem;
+  display: block;
 }
 
-.bib-entry-appears a {
-  color: #888;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  text-decoration-color: #ccc;
+.page-title {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
-
-.bib-entry-appears a:hover { color: #111; }
 
 /* ─── Footer ────────────────────────────────────────────────────────────────── */
 
 .site-footer {
-  border-top: 1px solid #e8e6df;
+  border-top: 1px solid #e2e2e2;
   padding: 2rem 0;
   text-align: center;
-  font-family: 'EB Garamond', Palatino, serif;
-  font-size: 0.88rem;
-  color: #aaa;
-  letter-spacing: 0.03em;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  color: #bbb;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
-/* ─── Page headings ─────────────────────────────────────────────────────────── */
-
-.page-title {
-  font-family: 'EB Garamond', Palatino, serif;
-  font-size: 2rem;
-  font-weight: 600;
-  color: #111;
-  margin-bottom: 0.5rem;
-  line-height: 1.2;
-}
-
-.page-subtitle {
-  font-family: 'EB Garamond', Palatino, serif;
-  font-size: 1.1rem;
-  color: #777;
-  line-height: 1.6;
-  margin-bottom: 0;
+@media (max-width: 600px) {
+  html { font-size: 16px; }
+  .site-wrap { padding: 0 1.2rem; }
+  .site-nav-inner { padding: 0 1.2rem; }
+  .article-page-title { font-size: 2rem; }
 }

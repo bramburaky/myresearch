@@ -8,68 +8,41 @@ export default async function BibliographyPage() {
 
   return (
     <div>
-      <header className="mb-12">
-        <h1
-          className="text-4xl font-semibold mb-4"
-          style={{ fontFamily: "'EB Garamond', Georgia, serif", color: "#1a1614" }}
-        >
-          Bibliografia
-        </h1>
-        <p style={{ fontFamily: "'EB Garamond', Georgia, serif", color: "#6b6560", fontSize: "1.1rem" }}>
-          Tutte le fonti citate negli articoli, organizzate per autore.
-        </p>
+      <header style={{ paddingBottom: "2rem", borderBottom: "1px solid #e2e2e2", marginBottom: "2.5rem" }}>
+        <span className="page-eyebrow">Archivio</span>
+        <h1 className="page-title">Bibliografia</h1>
       </header>
 
-      <hr className="divider" />
-
       {authors.length === 0 ? (
-        <p style={{ color: "#6b6560" }}>Nessuna fonte ancora presente.</p>
+        <p style={{ color: "#aaa", fontFamily: "EB Garamond, Georgia, serif" }}>Nessuna fonte ancora presente.</p>
       ) : (
-        <div className="space-y-12">
+        <div>
           {authors.map((author) => (
-            <section key={author}>
-              <h2
-                className="text-xl font-semibold mb-5"
-                style={{ fontFamily: "'EB Garamond', Georgia, serif", color: "#1a1614" }}
-              >
-                {author}
-              </h2>
-              <ul className="space-y-4">
-                {byAuthor[author]
-                  .sort((a, b) => (a.year || "").localeCompare(b.year || ""))
-                  .map((ref, i) => (
-                    <li key={i} className="border-l-2 pl-4" style={{ borderColor: "#ede4d3" }}>
-                      <p style={{ fontFamily: "'EB Garamond', Georgia, serif", fontSize: "1rem", color: "#3d3530" }}>
-                        <em>{ref.title}</em>
-                        {ref.year ? <span style={{ color: "#9c9189" }}> · {ref.year}</span> : ""}
-                        {ref.publisher ? <span style={{ color: "#9c9189" }}> · {ref.publisher}</span> : ""}
-                      </p>
-                      {ref.url && (
-                        <a
-                          href={ref.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ fontFamily: "'Inter', sans-serif", fontSize: "0.8rem", color: "#8b7355" }}
-                        >
-                          Fonte →
-                        </a>
-                      )}
-                      <div className="mt-1 flex flex-wrap gap-1">
-                        {ref.appearsIn.map((slug) => (
-                          <a
-                            key={slug}
-                            href={`/articles/${slug}`}
-                            className="tag"
-                            style={{ fontSize: "0.68rem" }}
-                          >
-                            {slug}
-                          </a>
-                        ))}
-                      </div>
-                    </li>
-                  ))}
-              </ul>
-            </section>
+            <div key={author} className="bib-section">
+              <p className="bib-author">{author}</p>
+              {byAuthor[author]
+                .sort((a, b) => (a.year || "").localeCompare(b.year || ""))
+                .map((ref, i) => (
+                  <div key={i} className="bib-entry">
+                    <em>{ref.title}</em>
+                    {ref.year && <span style={{ color: "#aaa" }}> · {ref.year}</span>}
+                    {ref.publisher && <span style={{ color: "#aaa" }}> · {ref.publisher}</span>}
+                    {ref.url && (
+                      <> <a href={ref.url} target="_blank" rel="noopener noreferrer"
+                        style={{ color: "#999", textDecoration: "underline" }}>→</a></>
+                    )}
+                    <div className="bib-appears">
+                      citato in:{" "}
+                      {ref.appearsIn.map((slug, j) => (
+                        <span key={slug}>
+                          {j > 0 && ", "}
+                          <a href={`/articles/${slug}`}>{slug.replace(/-/g, " ").replace(/_/g, " ")}</a>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+            </div>
           ))}
         </div>
       )}

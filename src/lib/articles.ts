@@ -44,7 +44,7 @@ export async function getAllArticles(): Promise<ArticleMeta[]> {
       title: data.title || slug,
       date: data.date ? String(data.date) : "",
       excerpt: data.excerpt || "",
-      author: data.author || "",
+      author: data.author || (Array.isArray(data.authors) ? data.authors.join(", ") : data.authors) || "",
       tags: data.tags || [],
       bibliography: data.bibliography || [],
     } as ArticleMeta;
@@ -70,7 +70,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     title: data.title || slug,
     date: data.date ? String(data.date) : "",
     excerpt: data.excerpt || "",
-    author: data.author || "",
+    author: data.author || (Array.isArray(data.authors) ? data.authors.join(", ") : data.authors) || "",
     tags: data.tags || [],
     bibliography: data.bibliography || [],
     contentHtml: processed.toString(),
