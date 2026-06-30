@@ -340,6 +340,36 @@ body {
   letter-spacing: -0.01em;
 }
 
+/* ─── Article layout with TOC ───────────────────────────────────────────────── */
+
+.article-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 2rem 5rem;
+}
+
+.article-main { min-width: 0; }
+
+.article-toc { display: none; }
+
+@media (min-width: 1200px) {
+  .article-layout {
+    max-width: 1140px;
+    grid-template-columns: 700px 1fr;
+    gap: 0;
+    align-items: start;
+  }
+  .article-toc {
+    display: block;
+  }
+}
+
+@media (max-width: 600px) {
+  .article-layout { padding: 0 1.2rem 4rem; }
+}
+
 /* ─── Footer ────────────────────────────────────────────────────────────────── */
 
 .site-footer {

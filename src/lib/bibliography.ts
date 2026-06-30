@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
-import { BibEntry } from "./articles";
+import { BibEntry, getArticleBySlug } from "./articles";
 
 const articlesDir = path.join(process.cwd(), "content", "articles");
 
@@ -17,11 +17,10 @@ export async function getAllBibliography(): Promise<Record<string, BibEntryWithS
 
   for (const filename of files) {
     const slug = filename.replace(/\.md$/, "");
-    const filePath = path.join(articlesDir, filename);
-    const { data } = matter(fs.readFileSync(filePath, "utf8"));
+    const article = await getArticleBySlug(slug);
+    if (!article) continue;
 
-    const refs: BibEntry[] = data.bibliography || [];
-    for (const ref of refs) {
+    for (const ref of article.bibliography || []) {
       const author = ref.author || "Autore sconosciuto";
       if (!byAuthor[author]) byAuthor[author] = [];
 

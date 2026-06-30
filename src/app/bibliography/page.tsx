@@ -7,7 +7,7 @@ export default async function BibliographyPage() {
   const authors = Object.keys(byAuthor).sort((a, b) => a.localeCompare(b, "it"));
 
   return (
-    <div>
+    <div className="site-wrap" style={{ paddingTop: "2.5rem", paddingBottom: "5rem" }}>
       <header style={{ paddingBottom: "2rem", borderBottom: "1px solid #e2e2e2", marginBottom: "2.5rem" }}>
         <span className="page-eyebrow">Archivio</span>
         <h1 className="page-title">Bibliografia</h1>
@@ -36,7 +36,7 @@ export default async function BibliographyPage() {
                       {ref.appearsIn.map((slug, j) => (
                         <span key={slug}>
                           {j > 0 && ", "}
-                          <a href={`/articles/${slug}`}>{slug.replace(/-/g, " ").replace(/_/g, " ")}</a>
+                          <a href={`/articles/${slug}`}>{slug.replace(/[-_]/g, " ")}</a>
                         </span>
                       ))}
                     </div>
